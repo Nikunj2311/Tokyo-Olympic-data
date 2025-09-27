@@ -1,6 +1,7 @@
-
+<img width="1000" height="493" alt="image" src="https://github.com/user-attachments/assets/9e0fad2f-afe5-428a-8617-ee7d23031009" />
 # 🏅 Tokyo Olympics Data Engineering Pipeline 🏅
 This repository contains the full data engineering workflow, from raw data ingestion and cleaning (ETL/ELT) to data modeling and storage, using Azure Data Services (Databricks, Synapse) and GitHub for version control. The final structured data is ready for downstream analytics (e.g., in Power BI or Tableau) to analyze medal counts, athlete performance, and gender participation trends.
+
 
 ## ⚙️ Project Architecture & Technologies
 The solution implements a scalable and repeatable data pipeline hosted primarily on Azure.

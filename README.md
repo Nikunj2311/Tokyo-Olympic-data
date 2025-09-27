@@ -68,9 +68,9 @@ Execute Cells: Run all cells sequentially. The final output is the set of clean,
 ## 📈 Final Data Model (Consumption Layer)
 The final data is modeled into clean tables (saved in Delta format) ready for analysis, which can be easily queried from Azure Synapse or directly from Databricks SQL.
 
-Table Name	Description	Key Fields
-athlete_clean	Cleaned and standardized athlete details.	PersonName, Country, Discipline
-medals_clean	Final medal count with proper typing.	Rank, Team/Country, Total
-gender_participation	Derived table for comparing Male/Female entries.	Discipline, Avg_Female, Avg_Male
+## Table Name    	        Description Key                                     Fields
+athlete_clean	          Cleaned and standardized athlete details.  	        PersonName, Country, Discipline
+medals_clean  	        Final medal count with proper typing.      	        Rank, Team/Country, Total
+gender_participation  	Derived table for comparing Male/Female entries.  	Discipline, Avg_Female, Avg_Male
 
 

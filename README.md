@@ -1,78 +1,278 @@
+# 🏅 Tokyo Olympics Data Engineering Pipeline
 
-# 🏅 Tokyo Olympics Data Engineering Pipeline 🏅
-This repository contains the full data engineering workflow, from raw data ingestion and cleaning (ETL/ELT) to data modeling and storage, using Azure Data Services (Databricks, Synapse) and GitHub for version control. The final structured data is ready for downstream analytics (e.g., in Power BI or Tableau) to analyze medal counts, athlete performance, and gender participation trends.
+A scalable end-to-end Data Engineering pipeline built on Azure to process, transform, and model Tokyo Olympics datasets for downstream analytics and reporting.
 
-<img width="1000" height="493" alt="image" src="https://github.com/user-attachments/assets/9e0fad2f-afe5-428a-8617-ee7d23031009" />
+This project demonstrates the complete lifecycle of a modern data pipeline — from raw data ingestion and distributed transformation using PySpark to analytics-ready storage using Delta Lake architecture.
 
-## ⚙️ Project Architecture & Technologies
-The solution implements a scalable and repeatable data pipeline hosted primarily on Azure.
+The final curated datasets can be consumed by BI and analytics platforms such as Power BI, Tableau, Azure Synapse, or Databricks SQL for advanced reporting and visualization.
 
-###Technologies Used
-Cloud Platform: Azure (Storage, Data Factory/Synapse)
+---
 
-Compute/Transformation: Azure Databricks (PySpark/Spark SQL)
+## 📌 Project Overview
 
-Version Control: GitHub
+The objective of this project is to design and implement a cloud-based data engineering workflow capable of:
 
-Programming Language: Python (PySpark)
+- Ingesting raw Olympic datasets into Azure Data Lake Storage
+- Performing scalable ETL/ELT transformations using PySpark
+- Cleaning and standardizing inconsistent datasets
+- Building analytics-ready Delta tables
+- Supporting downstream reporting and business intelligence workloads
 
-Data Storage: Azure Data Lake Storage (ADLS Gen2)
+---
 
-### High-Level Flow
-Ingestion: Raw data is uploaded to Azure Data Lake Storage (ADLS Gen2).
+## 🏗️ Solution Architecture
 
-Transformation (ETL/ELT): Azure Databricks notebooks read the raw data from ADLS, perform cleaning, normalization, and feature engineering.
+<img width="1000" height="493" alt="Architecture Diagram" src="https://github.com/user-attachments/assets/9e0fad2f-afe5-428a-8617-ee7d23031009" />
 
-Modeling/Storage: Cleaned data is saved back to ADLS in optimized Delta format, serving as the final Data Model (Lakehouse) for consumption.
+---
 
-## 🛠️ Data Sources & Pipeline Steps
-###Data Sources
-The project utilizes the following datasets (originally sourced from public data/Kaggle, etc.):
+## ⚙️ Tech Stack
 
-athlete.csv: Details on individual athletes.
+| Category | Technologies |
+|---|---|
+| Cloud Platform | Azure |
+| Data Storage | Azure Data Lake Storage Gen2 (ADLS Gen2) |
+| Compute Engine | Azure Databricks |
+| Processing Framework | PySpark / Spark SQL |
+| Data Format | Delta Lake |
+| Programming Language | Python |
+| Version Control | Git & GitHub |
+| Analytics Consumption | Power BI / Tableau / Databricks SQL |
 
-entriesGender.csv: Gender breakdown per discipline/country.
+---
 
-coaches.csv: Coach information.
+## 🔄 Pipeline Workflow
 
-medals.csv: Final medal tally per country.
+### 1️⃣ Data Ingestion
+Raw CSV datasets are uploaded into Azure Data Lake Storage (ADLS Gen2).
 
-### Databricks Transformation Steps
-The core data processing logic is implemented in the primary notebook: analysis/Tokyo Olympic Transformation.ipynb.
+### 2️⃣ Data Transformation (ETL/ELT)
+Azure Databricks notebooks process the raw files using distributed PySpark transformations.
 
-Mounting: Securely mounts the Azure Data Lake Storage (ADLS Gen2) container using OAuth (or service principal) for read/write access.
+Transformation tasks include:
+- Data cleaning
+- Schema standardization
+- Null handling
+- Data type conversion
+- Column normalization
+- Feature engineering
 
-Data Loading: Loads all raw CSV files into Spark DataFrames.
+### 3️⃣ Data Modeling
+The transformed datasets are stored in Delta format to create an analytics-ready Lakehouse layer.
 
-Cleaning & Normalization:
+### 4️⃣ Analytics Consumption
+The final Delta tables can be queried directly using:
+- Azure Synapse Analytics
+- Databricks SQL
+- Power BI
+- Tableau
 
-Handles null/missing values (e.g., for Total entries).
+---
 
-Casts columns to appropriate data types.
+## 📂 Project Structure
 
-Renames columns to eliminate ambiguity (e.g., renaming duplicated 'Country' columns).
+```bash
+Tokyo-Olympic-data/
+│
+├── Raw data/
+│   ├── athlete.csv
+│   ├── coaches.csv
+│   ├── entriesGender.csv
+│   └── medals.csv
+│
+├── transmitted data/
+│
+├── analysis/
+│   ├── Tokyo Olympic Transformation.ipynb
+│   └── analysis.sql
+│
+└── README.md
+```
 
-Feature Engineering: Creates derived metrics, such as a consolidated "Gender Participation" table for comparative analysis.
+---
 
-Saving: Writes the final, cleaned DataFrames back to ADLS in Delta format for optimized querying.
+## 📊 Dataset Information
 
-## ▶️ How to Run This Project
-To run and reproduce this pipeline, you need an Azure Databricks workspace linked to a GitHub account.
+The project uses publicly available Tokyo Olympics datasets.
 
-Clone the Repo: In your Databricks workspace, clone this repository URL: https://github.com/Nikun2311/Tokyo-Olympic-data into the Repos section.
+| Dataset | Description |
+|---|---|
+| athlete.csv | Athlete information and discipline details |
+| coaches.csv | Coach information by country and discipline |
+| entriesGender.csv | Male/Female participation statistics |
+| medals.csv | Country-wise medal tally |
 
-Azure Setup: Ensure your Databricks cluster has access to your Azure Data Lake Storage (ADLS Gen2) containing the raw data. The notebook uses an Azure AD/OAuth method for mounting the storage.
+---
 
-Run Notebook: Open the analysis/Tokyo Olympic Transformation.ipynb notebook.
+## 🛠️ Key Engineering Features
 
-Execute Cells: Run all cells sequentially. The final output is the set of clean, Delta-formatted tables written back to your ADLS container.
+- Built a scalable cloud-based ETL pipeline using Azure services
+- Performed distributed data processing using PySpark
+- Implemented modular transformation workflows
+- Used Delta Lake format for optimized querying and storage
+- Designed analytics-ready consumption tables
+- Structured data pipeline following modern Lakehouse principles
 
-## 📈 Final Data Model (Consumption Layer)
-The final data is modeled into clean tables (saved in Delta format) ready for analysis, which can be easily queried from Azure Synapse or directly from Databricks SQL.
+---
 
-## Table Name    	        Description Key                                     Fields
-athlete_clean	          Cleaned and standardized athlete details.  	        PersonName, Country, Discipline
-medals_clean  	        Final medal count with proper typing.      	        Rank, Team/Country, Total
-gender_participation  	Derived table for comparing Male/Female entries.  	Discipline, Avg_Female, Avg_Male
+## 🔍 Data Transformation Steps
 
+The transformation logic is implemented in:
 
+```bash
+analysis/Tokyo Olympic Transformation.ipynb
+```
+
+### Core Processing Steps
+
+#### ✅ Storage Mounting
+Mounted Azure Data Lake Storage securely inside Databricks using authentication mechanisms.
+
+#### ✅ Data Loading
+Loaded raw CSV files into Spark DataFrames.
+
+#### ✅ Data Cleaning
+Performed:
+- Null value handling
+- Duplicate removal
+- Data standardization
+- Invalid record filtering
+
+#### ✅ Schema Normalization
+- Converted columns into proper data types
+- Renamed ambiguous columns
+- Standardized dataset structures
+
+#### ✅ Feature Engineering
+Created derived datasets and aggregated metrics for analytics.
+
+#### ✅ Delta Storage
+Stored transformed datasets in Delta format for:
+- Better query performance
+- Scalability
+- ACID transaction support
+
+---
+
+## 📈 Final Data Model
+
+The pipeline produces analytics-ready Delta tables.
+
+| Table Name | Description | Key Fields |
+|---|---|---|
+| athlete_clean | Standardized athlete dataset | PersonName, Country, Discipline |
+| medals_clean | Final medal tally dataset | Rank, Country, Total |
+| gender_participation | Gender participation comparison metrics | Discipline, Avg_Male, Avg_Female |
+
+---
+
+## 📊 Business Insights Enabled
+
+The transformed datasets support:
+
+- Country-wise medal analysis
+- Athlete participation analysis
+- Gender participation comparison
+- Discipline-wise performance tracking
+- Olympic trend reporting
+- BI dashboard development
+
+---
+
+## ⚡ Engineering Challenges Solved
+
+- Managed inconsistent schemas across multiple datasets
+- Standardized naming conventions for countries and disciplines
+- Handled missing/null values during ingestion
+- Optimized transformed datasets using Delta Lake storage
+- Built reusable transformation workflows using PySpark
+
+---
+
+## ▶️ How to Run the Project
+
+### Prerequisites
+
+- Azure Subscription
+- Azure Data Lake Storage Gen2
+- Azure Databricks Workspace
+- GitHub Account
+- Databricks Cluster
+
+---
+
+### Setup Steps
+
+#### 1️⃣ Clone Repository
+
+```bash
+git clone https://github.com/Nikunj2311/Tokyo-Olympic-data.git
+```
+
+#### 2️⃣ Upload Raw Data
+Upload all CSV datasets into your ADLS Gen2 container.
+
+#### 3️⃣ Configure Databricks
+- Create a Databricks cluster
+- Configure ADLS access credentials
+- Mount storage container
+
+#### 4️⃣ Run Notebook
+
+Open:
+
+```bash
+analysis/Tokyo Olympic Transformation.ipynb
+```
+
+Run all notebook cells sequentially.
+
+#### 5️⃣ Query Final Tables
+The transformed Delta tables can now be queried using:
+- Databricks SQL
+- Synapse Analytics
+- Power BI
+- Tableau
+
+---
+
+## 🚀 Future Improvements
+
+- Automate orchestration using Azure Data Factory
+- Implement incremental data loading
+- Add CI/CD pipeline integration
+- Integrate real-time streaming ingestion
+- Build interactive Power BI dashboards
+- Add data quality validation framework
+
+---
+
+## 📌 Key Learnings
+
+This project helped strengthen understanding of:
+
+- Cloud-based Data Engineering workflows
+- Distributed data processing with PySpark
+- Azure Lakehouse architecture
+- ETL/ELT pipeline development
+- Delta Lake optimization
+- Analytics-ready data modeling
+
+---
+
+## 👨‍💻 Author
+
+### Nikunj Bansal
+
+Aspiring Data Engineer focused on building scalable cloud-based data pipelines and analytics systems.
+
+- GitHub: https://github.com/Nikunj2311
+- LinkedIn: https://www.linkedin.com/in/nikunj-bansal-166555347/
+
+---
+
+## ⭐ Repository Link
+
+```bash
+https://github.com/Nikunj2311/Tokyo-Olympic-data
+```
